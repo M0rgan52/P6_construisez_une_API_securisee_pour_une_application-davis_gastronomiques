@@ -3,7 +3,7 @@ const express = require('express');
 const { default: mongoose } = require('mongoose');
 const app = express();
 
-// Gestion des requêtes POST JSONs
+// Gestion des requêtes Express en JSON
 app.use(express.json()); 
 
 // Connexion API MongoDB
