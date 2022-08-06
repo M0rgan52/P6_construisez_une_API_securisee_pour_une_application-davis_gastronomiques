@@ -7,11 +7,11 @@ const app = express();
 app.use(express.json()); 
 
 // Connexion API MongoDB
-mongoose.connect('mongodb+srv://Morgan:<password>@cluster0.uodwo5p.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://Morgan:PiiquanteP6@cluster0.uodwo5p.mongodb.net/?retryWrites=true&w=majority',
 { useNewUrlParser: true,
     useUnifiedTopology: true
 })
-    .then(() => console.log('Connexion à MongoSB réussie !'))
+    .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 
