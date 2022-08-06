@@ -1,6 +1,19 @@
 // Création des constantes
 const express = require('express');
+const { default: mongoose } = require('mongoose');
 const app = express();
+
+// Gestion des requêtes POST JSONs
+app.use(express.json()); 
+
+// Connexion API MongoDB
+mongoose.connect('mongodb+srv://Morgan:<password>@cluster0.uodwo5p.mongodb.net/?retryWrites=true&w=majority',
+{ useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => console.log('Connexion à MongoSB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'));
+
 
 // Création des headers pour les erreurs CORS
 app.use((req, res, next) => {
