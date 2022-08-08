@@ -2,6 +2,8 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const app = express();
+const userRoutes = require('./routes/user');
+
 
 // Gestion des requêtes Express en JSON
 app.use(express.json()); 
@@ -41,6 +43,9 @@ app.use ((req, res, next) => {
 app.use ((req, res) => {
     console.log('Réponse envoyée avec succès !');
 });
+
+// Enregistrement des routeurs 
+app.use('/api/auth', userRoutes);
 
 // Export de la constante
 module.exports = app;
