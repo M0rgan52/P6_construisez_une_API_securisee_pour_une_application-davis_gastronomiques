@@ -1,8 +1,9 @@
 // Création des constantes
+const user = require('../models/user');
 const User = require('../models/user');
 
 /*Fonction signup :
-Appel de la fonction bscrypt pour hacher le mot de passe 10 fois
+Appel de la fonction bcrypt pour hacher le mot de passe 10 fois
 Création d'un nouvel utilisateur avec :
     un email présent dans la requête
     un mot de passe hashé
@@ -23,6 +24,29 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+/*Fonction login : 
+On recherche l'email présent dans la requête
+Si l'email est présent, on compare le mot de passe renseigné par celui enregistré grâce à bcrypt
+Si le couple est correcte, la fonction est valide
+Sinon erreur 500, 401 ou 200 
+*/
 exports.login = (req, res, next) => {
-
+    User.findOne({ email: req.body.email })
+        .then(user => {
+            if(!user) {
+                return res.status(401).json({ message: 'Ensemble identifiant/mot de passe incorrecte'});
+            }
+            bcrypt.compare(req.body.password, user.password)
+                .then(valid => {
+                    if (!valid){
+                        return res.status(401).json({ message: 'Ensemble identifiant/mot de passe incorrecte' });
+                    }
+                    res.status(200).json({
+                        userId: user._id,
+                        token: 'TOKEN'
+                    });
+                })
+                .catch(error => res.status(500).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
 };
