@@ -1,6 +1,6 @@
 // Création des constantes
-const user = require('../models/user');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 /*Fonction signup :
 Appel de la fonction bcrypt pour hacher le mot de passe 10 fois
@@ -27,7 +27,7 @@ exports.signup = (req, res, next) => {
 /*Fonction login : 
 On recherche l'email présent dans la requête
 Si l'email est présent, on compare le mot de passe renseigné par celui enregistré grâce à bcrypt
-Si le couple est correcte, la fonction est valide
+Si le couple est correcte, la fonction est valide et renvoi un token utilisable 24h
 Sinon erreur 500, 401 ou 200 
 */
 exports.login = (req, res, next) => {
@@ -43,7 +43,11 @@ exports.login = (req, res, next) => {
                     }
                     res.status(200).json({
                         userId: user._id,
-                        token: 'TOKEN'
+                        token: jwt.sign(
+                            { userId: user._id },
+                            'RANDOM_TOKEN_SERCRET',
+                            { expiresIn: '24h' }
+                        )
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
