@@ -10,7 +10,7 @@ que le mot de passe soit bien unique avant l'exportation comme modèle
 */
 const userSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true }
 });
 
 userSchema.plugin(uniqueValidator);

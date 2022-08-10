@@ -1,5 +1,6 @@
 // Création des constantes
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 /*Fonction signup :
@@ -18,7 +19,7 @@ exports.signup = (req, res, next) => {
                 password: hash
             });
             user.save()
-                .then(() => res.statuts.json({ message: 'Utilisateur créé !' }))
+                .then(() => res.statuts(201).json({ message: 'Utilisateur créé !' }))
                 .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
@@ -33,7 +34,7 @@ Sinon erreur 500, 401 ou 200
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {
-            if(!user) {
+            if(user === null) {
                 return res.status(401).json({ message: 'Ensemble identifiant/mot de passe incorrecte'});
             }
             bcrypt.compare(req.body.password, user.password)
