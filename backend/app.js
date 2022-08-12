@@ -1,6 +1,7 @@
 // Création des constantes
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 // Enregistrement des routeurs 
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Export de la constante
 module.exports = app;
