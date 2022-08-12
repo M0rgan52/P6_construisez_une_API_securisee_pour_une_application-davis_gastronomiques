@@ -39,13 +39,13 @@ exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
             if (sauce.userId != req.auth.userId) {
-                res.status(401).json({ message; 'Non autorisé'})
+                res.status(401).json({ message: 'Non autorisé'})
             } else {
                 const filename = sauce.imageUrl.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
                     Sauce.deleteOne({ _id: req.params.id})
-                        .then(() => res.status(200).json({ message; 'Sauce supprimée !'}))
-                        .catch( error => res.status(401).json({ message; 'Non autorisé'}));
+                        .then(() => res.status(200).json({ message: 'Sauce supprimée !'}))
+                        .catch( error => res.status(401).json({ message: 'Non autorisé'}));
                 })
             }
         })
