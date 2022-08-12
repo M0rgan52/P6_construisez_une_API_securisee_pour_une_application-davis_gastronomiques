@@ -1,6 +1,6 @@
 // Création des constantes
-const User = require('../models/user');
 const bcrypt = require('bcrypt');
+const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 
 /*Fonction signup :
@@ -19,7 +19,7 @@ exports.signup = (req, res, next) => {
                 password: hash
             });
             user.save()
-            .then(() => res.statuts(201).json({ message: 'Utilisateur créé !' }))
+            .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
             .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));

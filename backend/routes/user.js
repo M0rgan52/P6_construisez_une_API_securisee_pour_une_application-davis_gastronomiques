@@ -1,7 +1,8 @@
 // Création des constantes
 const express = require('express');
-const userCtrl = require('../controllers/user');
 const router = express.Router();
+const userCtrl = require('../controllers/user');
+
 
 
 // Création des routes prévues par le frontend
