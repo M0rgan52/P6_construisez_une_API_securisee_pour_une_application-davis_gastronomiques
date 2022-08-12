@@ -19,8 +19,8 @@ exports.signup = (req, res, next) => {
                 password: hash
             });
             user.save()
-                .then(() => res.statuts(201).json({ message: 'Utilisateur créé !' }))
-                .catch(error => res.status(400).json({ error }));
+            .then(() => res.statuts(201).json({ message: 'Utilisateur créé !' }))
+            .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
 };
@@ -29,7 +29,7 @@ exports.signup = (req, res, next) => {
 On recherche l'email présent dans la requête
 Si l'email est présent, on compare le mot de passe renseigné par celui enregistré grâce à bcrypt
 Si le couple est correcte, la fonction est valide et renvoi un token utilisable 24h
-Sinon erreur 500, 401 ou 200 
+Sinon erreur 500 ou 401
 */
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
@@ -46,7 +46,7 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: jwt.sign(
                             { userId: user._id },
-                            'RANDOM_TOKEN_SERCRET',
+                            'RANDOM_TOKEN_SECRET',
                             { expiresIn: '24h' }
                         )
                     });
