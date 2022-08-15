@@ -16,10 +16,6 @@ mongoose.connect('mongodb+srv://Morgan:PiiquanteP6@cluster0.uodwo5p.mongodb.net/
 
 const app = express();
 
-// Gestion des requêtes Express en JSON
-app.use(express.json()); 
-
-
 // Création des headers pour les erreurs CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,6 +23,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 })
+
+// Gestion des requêtes Express en JSON
+app.use(express.json()); 
 
 // Enregistrement des routeurs 
 app.use('/api/sauces', sauceRoutes);
