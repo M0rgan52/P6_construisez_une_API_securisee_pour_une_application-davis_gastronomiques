@@ -2,12 +2,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const dotenv = require('dotenv').config();
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
 // Connexion API MongoDB
-mongoose.connect('mongodb+srv://Morgan:PiiquanteP6@cluster0.uodwo5p.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.SECRET_DB,
 { useNewUrlParser: true,
     useUnifiedTopology: true
 })
