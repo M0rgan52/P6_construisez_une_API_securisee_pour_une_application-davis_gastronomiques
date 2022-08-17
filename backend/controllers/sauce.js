@@ -69,7 +69,7 @@ exports.likesDislikes = (req, res, next) => {
     const userId = req.body.userId;
 
     if (like === 1) {
-        Sauce.updateOne({ _id: req.params.id}, {$push: {userLiked: userId}, $inc: {likes: +1}})
+        Sauce.updateOne({ _id: req.params.id}, {$push: {usersLiked: userId}, $inc: {likes: +1}})
             .then(() => res.status(200).json({ message : "J'aime cette sauce ! "}))
             .catch((error) => res.status(400).json({ error }));
     }
