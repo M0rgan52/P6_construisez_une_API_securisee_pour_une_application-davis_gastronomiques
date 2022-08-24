@@ -2,7 +2,7 @@
 
 Comment lancer le projet ?
 
-gitclone : 
+gitclone : https://github.com/M0rgan52/P6_construisez_une_API_securisee_pour_une_application-davis_gastronomiques.git
 
 Frontend :
 
